@@ -1,5 +1,6 @@
 
 public class PercolationUF implements IPercolate {
+	int size;
 	boolean[][] myGrid = new boolean[size][size];
 	int myOpenCount = 0;
 
