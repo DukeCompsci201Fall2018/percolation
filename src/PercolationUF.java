@@ -16,8 +16,8 @@ public class PercolationUF implements IPercolate {
 		myGrid = new boolean[size][size];
 		VTOP = size*size;
 		VBOTTOM = size*size + 1;
-		finder.initialize(size*size + 2);
 		myFinder = finder;
+		finder.initialize(size*size + 2);
 	}
 
 	@Override
