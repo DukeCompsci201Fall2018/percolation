@@ -1,6 +1,5 @@
 
 public class PercolationUF implements IPercolate {
-	int size;
 	boolean[][] myGrid = new boolean[size][size];
 	int myOpenCount = 0;
 
@@ -10,7 +9,8 @@ public class PercolationUF implements IPercolate {
 	
 	@Override
 	public void open(int row, int col) {
-		// TODO Auto-generated method stub
+		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
+		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
 		
 	}
 
@@ -23,7 +23,8 @@ public class PercolationUF implements IPercolate {
 
 	@Override
 	public boolean isFull(int row, int col) {
-		// TODO Auto-generated method stub
+		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
+		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
 		return false;
 	}
 
