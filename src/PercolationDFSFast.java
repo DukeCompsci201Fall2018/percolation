@@ -19,19 +19,24 @@ public class PercolationDFSFast extends PercolationDFS {
 			dfs(row,col);
 			return;
 		}
-		//if the square above it is 
+		//if the cell above it is full
 		if ((inBounds(row-1,col) && isFull(row-1,col))) { 
 			dfs(row,col);
 			return;
 		}
+		//if the cell below it is full
 		if ((inBounds(row+1,col) && isFull(row+1,col))) { 
 			dfs(row,col);
 			return;
 		}
+		
+		//if the cell to the left is full
 		if ((inBounds(row,col-1) && isFull(row,col-1))) { 
 			dfs(row,col);
 			return;
 		}
+		
+		//if the cell to the right is full
 		if ((inBounds(row,col+1) && isFull(row,col+1))) { 
 			dfs(row,col);
 			return;
