@@ -14,7 +14,7 @@ public class InteractivePercolationVisualizer {
 	public static void main(String[] args) {
 
 		// N-by-N percolation system
-		int N = 5;
+		int N = 10;
 		if (args.length > 0) {
 			N = Integer.parseInt(args[0]);
 		}

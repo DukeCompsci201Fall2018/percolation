@@ -92,10 +92,9 @@ public class PercolationDFS implements IPercolate {
 	 * Private helper method to mark all cells that are open and reachable from
 	 * (row,col).
 	 * 
-	 * @param row
-	 *            is the row coordinate of the cell being checked/marked
-	 * @param col
-	 *            is the col coordinate of the cell being checked/marked
+	 * @param row is the row coordinate of the cell being checked/marked
+	 * @param col is the column coordinate of the cell being checked/marked
+	 * This version uses recursion.
 	 */
 	protected void dfs(int row, int col) {
 		// out of bounds?
