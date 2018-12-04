@@ -59,7 +59,7 @@ public interface IPercolate {
 	 * returning true typically means there's a connected path from
 	 * top-to-bottom.
 	 * 
-	 * @return true iff the simulated system percolates
+	 * @return true if the simulated system percolates
 	 */
 	public abstract boolean percolates();
 	
