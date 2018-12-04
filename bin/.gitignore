@@ -12,3 +12,5 @@
 /TestUFPercolation.class
 /ErdosNumbers.class
 /PercolationDFSFast.class
+/PercolationBFS.class
+/PercolationUF.class
