@@ -1,18 +1,23 @@
 
 public class PercolationUF implements IPercolate {
-	int size;
-	boolean[][] myGrid = new boolean[size][size];
-	int myOpenCount = 0;
-
-	public PercolationUF(int size, IUnionFind finder) {
-		
-	}
 	
-	@Override
-	public void open(int row, int col) {
-		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
-		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
-		
+	//instance variables
+	boolean[][] myGrid;
+	int myOpenCount = 0;
+	IUnionFind myFinder;
+	int VTOP;
+	int VBOTTOM;
+	
+
+	/*
+	 * 
+	 */
+	public PercolationUF(int size, IUnionFind finder) {
+		myGrid = new boolean[size][size];
+		VTOP = size*size;
+		VBOTTOM = size*size + 1;
+		finder.initialize(size*size + 2);
+		myFinder = finder;
 	}
 
 	@Override
@@ -26,19 +31,27 @@ public class PercolationUF implements IPercolate {
 	public boolean isFull(int row, int col) {
 		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
 		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
-		return false;
+		return myFinder.connected(VTOP, makeInt(row,col));
 	}
 
 	@Override
 	public boolean percolates() {
-		// TODO Auto-generated method stub
-		return false;
+		return myFinder.connected(VTOP, VBOTTOM);
 	}
 
 	@Override
 	public int numberOfOpenSites() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myOpenCount;
 	}
 
+	private int makeInt(int row, int col) {
+		return row * myGrid.length + col;
+	}
+
+	@Override
+	public void open(int row, int col) {
+		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
+		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
+		
+	}
 }

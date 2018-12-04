@@ -53,7 +53,7 @@ public class QuickUWPC implements IUnionFind {
     }
     
     public void initialize(int n) {
-    		count = n;
+    	count = n;
         parent = new int[n];
         size = new int[n];
         for (int i = 0; i < n; i++) {
