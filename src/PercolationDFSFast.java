@@ -9,10 +9,6 @@ public class PercolationDFSFast extends PercolationDFS {
 	}
 	
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see PercolationDFS#updateOnOpen(int, int)
-	 */
 	public void updateOnOpen(int row, int col) {
 		//if touches the top, fill it
 		if (row == 0) {
