@@ -57,6 +57,7 @@ public class PercolationUF implements IPercolate {
         int[] colDelta = {-1,1,0,0};
 		if (! isOpen(row, col)) {
 			myGrid[row][col] = true;
+			myOpenCount += 1;
 			int cellInt = makeInt(row,col);		
 			
             //if cell is connected to VTOP, union
