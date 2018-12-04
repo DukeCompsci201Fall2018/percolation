@@ -53,5 +53,35 @@ public class PercolationUF implements IPercolate {
 		if (row < 0 || row >= myGrid.length) throw new IndexOutOfBoundsException();
 		if (col < 0 || col >= myGrid[0].length) throw new IndexOutOfBoundsException();
 		
+		int[] rowDelta = {0,0,-1,1};
+        int[] colDelta = {-1,1,0,0};
+		if (! isOpen(row, col)) {
+			myGrid[row][col] = true;
+			int cellInt = makeInt(row,col);		
+			
+            //if cell is connected to VTOP, union
+            if (row == 0) myFinder.union(cellInt, VTOP);
+            
+            //if cell is connected to VBOTTOM, union
+            if (row == myGrid.length - 1) myFinder.union(cellInt, VBOTTOM);
+            	
+            //investigate neighbors
+            for(int k=0; k < rowDelta.length; k++){
+                int neighborRow = row + rowDelta[k];
+                int neighborCol = col + colDelta[k];
+                //if neighbor is in bounds and open, union
+                if (inBounds(neighborRow,neighborCol) && isOpen(neighborRow,neighborCol)){
+                	myFinder.union(cellInt, makeInt(neighborRow,neighborCol));
+                }
+            }
+			
+		}
+		
+	}
+
+	private boolean inBounds(int row, int col) {
+		if (row < 0 || row >= myGrid.length) return false;
+		if (col < 0 || col >= myGrid[0].length) return false;
+		return true;
 	}
 }
