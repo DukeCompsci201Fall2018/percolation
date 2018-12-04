@@ -8,7 +8,7 @@ grid	mean	stddev	time
 100	    0.593	0.014	0.188
 200	    0.591	0.010	0.289
 400	    0.590	0.006	1.058
-800	0.594	0.004	5.364
+800	    0.594	0.004	5.364
 Exception in thread "main" java.lang.StackOverflowError
 	at PercolationDFS.dfs(PercolationDFS.java:108)
 	at PercolationDFS.dfs(PercolationDFS.java:108)
@@ -16,16 +16,18 @@ Exception in thread "main" java.lang.StackOverflowError
 	...
 
 
+
 Copy/Paste results from PercolationStats using PercolationBFS.
 
 simulation data for 20 trials
 grid	mean	stddev	time
-100	    0.593	0.014	0.309
-200	    0.591	0.010	0.274
-400	    0.590	0.006	1.040
-800	    0.594	0.004	5.195
-1600	0.592	0.002	29.615
-3200	0.593	0.001	203.503
+100	    0.593	0.014	0.230
+200	    0.591	0.010	0.214
+400	    0.590	0.006	0.894
+800	    0.594	0.004	7.205
+1600	0.592	0.002	48.512
+3200	0.593	0.001	314.673
+
 
 
 Copy/Paste results from PercolationStats using PercolationUF 
@@ -33,18 +35,50 @@ with the QuickUWPC UnionFind implementation.
 
 simulation data for 20 trials
 grid	mean	stddev	time
-100	    0.593	0.014	0.175
-200	    0.591	0.010	0.236
-400  	0.590	0.006	0.689
-800 	0.594	0.004	4.786
-1600	0.592	0.002	21.666
-3200	0.593	0.001	123.717
+100	    0.593	0.014	0.200     
+200	    0.591	0.010	0.227    (prev x 1.135)
+400	    0.590	0.006	0.747    (prev x 3.291)
+800	    0.594	0.004	4.620    (prev x 6.185)
+1600	0.592	0.002	22.407   (prev x 4.85)
+3200	0.593	0.001	117.381  (prev x 5.39) ...?
+
 
 
 1. How does doubling the grid size affect running time (keeping # trials fixed)?
 
+Doubling the grid size increases running time. When I used grid size as L1 and time as L2
+and did a regression analysis, the R^2 value for linear regression was .911, and for quadratic
+regression it was .999, which makes me think the relation is quadratic. However I don't have much
+data so I'm not positive.
+
 
 2. How does doubling the number of trials affect running time?
 
+Doubling the grid size approximately doubled the run time for a given grid size.
+For example, with 20 trials, the run time for a size-1600 grid using PercolationUF was 22.407.
+With 40 trials, it became 43.097.
+The correlation isn't perfect, but it's decently close. The first two probably depend more on 
+garbage collection and other internal processes more than code, which is why they aren't affected
+much by doubling the number of trials. If compare the differences in times with 20 and 40 trials by
+using bigger grids, we could probably get a better idea.
+
+table of run times using PercolationUF with varying # of trials
+grid	20 trials	40 trials	20 --> 40 multiplication factor
+100		.200		.173        .865
+200		.227		.223        .982
+400		.747		1.251       1.675
+800		4.620		8.698       1.883
+1600	22.407		43.097      1.923
+3200	117.381		199.880     1.7
+
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+
+I used a graphing calculator to find an equation of best fit.
+
+y = ax^2 + bx + c --> y = 1.409E-5x^2 - .009x + 1.616,
+where y is runtime and x is grid size, has an R^2 value of .999.
+
+When I solve for y = 86400 seconds (24 hours), x is 78626.437.
+Thus I think the largest grid that could be processed in 24 hours is of size 78400.
+

@@ -3,16 +3,23 @@ import java.util.Queue;
 
 public class PercolationBFS extends PercolationDFSFast {
 
-	/*
+	/**
+	 * Initialize a grid so that all cells are blocked.
 	 * 
+	 * @param n is the size of the simulated (square) grid
 	 */
 	public PercolationBFS(int n) {
 		super(n);
 	}
 	
 	
-	/*
+	/**
+	 * Private helper method to mark all cells that are open and reachable from
+	 * (row,col).
 	 * 
+	 * @param row is the row coordinate of the cell being checked/marked
+	 * @param col is the column coordinate of the cell being checked/marked
+	 * This version uses a queue.
 	 */
 	@Override
 	public void dfs(int row, int col) {
